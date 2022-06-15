@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build bcm27xx/bcm2709 openwrt
+name: Build bcm2709
 
 on:
   workflow_dispatch:
