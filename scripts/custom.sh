@@ -24,3 +24,15 @@ popd
 
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
+
+# Modify default IP
+sed -i "s/timezone='UTC'/timezone='UTC+3'/" package/base-files/files/bin/config_generate
+sed -i "/timezone='UTC+3'/a \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ set system.@system[-1].zonename='Europe/Istanbul'" package/base-files/files/bin/config_generate
+
+echo "src-git small https://github.com/kenzok8/small" >> feeds.conf.default
+echo "src-git others https://github.com/kenzok8/openwrt-packages" >> feeds.conf.default
+
+mkdir package/hermes
+git clone https://github.com/vernesong/OpenClash package/hermes/luci-app-openclash
+./scripts/feeds update -a
+./scripts/feeds install -a
